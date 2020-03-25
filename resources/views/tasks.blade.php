@@ -1,9 +1,21 @@
+<style>
+    .grid_2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+</style>
+
 <div>
-    <ul>
+    <div class="grid_2">
         @foreach($tasks as $task)
-        <li>{{ $task->name }}</li>
+        {{ $task->name }}
+        <form class="inline" action="/task/{{ $task->id }}" method=POST>
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <button type=submit>delete</button>
+        </form>
         @endforeach
-    </ul>
+    </div>
 </div>
 <form method=POST action="/task">
     {{ csrf_field() }}
